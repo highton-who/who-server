@@ -1,6 +1,7 @@
 package com.pick.zick.domain.user.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,6 +11,8 @@ import org.hibernate.annotations.DynamicUpdate;
 @Getter
 @NoArgsConstructor
 @DynamicUpdate
+@AllArgsConstructor
+@Builder
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
