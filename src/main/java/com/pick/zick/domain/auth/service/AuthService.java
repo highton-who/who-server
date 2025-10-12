@@ -2,6 +2,7 @@ package com.pick.zick.domain.auth.service;
 
 import com.pick.zick.domain.auth.dto.SignupRequest;
 import com.pick.zick.domain.auth.dto.LoginRequest;
+import com.pick.zick.domain.user.entity.Role;
 import com.pick.zick.domain.user.entity.User;
 import com.pick.zick.domain.user.repository.UserRepository;
 import com.pick.zick.global.security.JwtProvider;
@@ -31,7 +32,7 @@ public class AuthService {
                 .loginId(req.loginId())
                 .userName(req.userName())
                 .studentNumber(req.studentNumber())
-                .role(req.role())
+                .role(Role.valueOf(req.role()))
                 .password(passwordEncoder.encode(req.password()))
                 .build();
         userRepository.save(user);
