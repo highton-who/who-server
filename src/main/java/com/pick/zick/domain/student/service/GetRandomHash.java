@@ -1,5 +1,6 @@
 package com.pick.zick.domain.student.service;
 
+import com.pick.zick.domain.student.dto.response.QrResponse;
 import com.pick.zick.domain.user.entity.User;
 import com.pick.zick.domain.user.facade.UserFacade;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +20,7 @@ public class GetRandomHash {
     private final RedisTemplate<String, String> redisTemplate;
     private final UserFacade userFacade;
 
-    public String makeHash() throws NoSuchAlgorithmException {
+    public QrResponse makeHash() throws NoSuchAlgorithmException {
         User user = userFacade.getCurrentUser();
         Long studentId = user.getId();
         System.out.println(studentId);
@@ -33,8 +34,12 @@ public class GetRandomHash {
         StringBuilder hex = new StringBuilder(hash.length * 2);
         for (byte b : hash) hex.append(String.format("%02x", b));
 
-        saveHashToRedis(hex.toString(),  studentId);
-        return hex.toString();
+        String hashString = hex.toString();
+
+        saveHashToRedis(hashString,  studentId);
+        return QrResponse.builder()
+                .key(hashString)
+                .build();
     }
 
     private void saveHashToRedis(String hash, Long studentId) {

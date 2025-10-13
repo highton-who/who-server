@@ -4,6 +4,7 @@ import com.pick.zick.domain.student.dto.request.CheckCanEnterRequest;
 import com.pick.zick.domain.student.dto.request.UpdateStudentRequest;
 import com.pick.zick.domain.student.dto.response.CheckCanEnterResponse;
 import com.pick.zick.domain.student.dto.response.ExcelResponse;
+import com.pick.zick.domain.student.dto.response.QrResponse;
 import com.pick.zick.domain.student.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +22,7 @@ public class StudentController {
     private final DeleteStudentService deleteStudentService;
 
     @GetMapping("/qr")
-    public String getRandomHash() throws NoSuchAlgorithmException {
+    public QrResponse getRandomHash() throws NoSuchAlgorithmException {
         return getRandomHash.makeHash();
     }
 

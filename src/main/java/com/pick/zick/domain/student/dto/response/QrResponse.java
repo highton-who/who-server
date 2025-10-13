@@ -1,11 +1,11 @@
 package com.pick.zick.domain.student.dto.response;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 
 @Getter
-@AllArgsConstructor
-public class ExcelResponse {
-    private final String fileName;
-    private final String fileData;
+@Builder
+public class QrResponse {
+    private final String key;
 }

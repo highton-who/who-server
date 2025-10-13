@@ -20,9 +20,10 @@ public class AuthService {
     private final JwtProvider jwtProvider;
 
     public TokenResponse signup(SignupRequest req) {
-        if (userRepository.existsByLoginId(req.loginId())) {
-            throw new IllegalStateException("이미 가입된 아이디입니다");
-        }
+//        if (userRepository.existsByLoginId(req.loginId())) {
+//            System.out.println(req.loginId());
+//            throw new IllegalStateException("이미 가입된 아이디입니다");
+//        }
 
         User user = User.builder()
                 .loginId(req.loginId())
