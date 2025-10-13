@@ -44,5 +44,11 @@ public class User {
     public void updateVerified(Boolean verified) {
         this.verified = verified;
     }
+
+    public void update(String studentNumber, String userName, Boolean applied){
+        this.studentNumber = studentNumber;
+        this.userName = userName;
+        this.applied = applied;
+    }
 }
 
