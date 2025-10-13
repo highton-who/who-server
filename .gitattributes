@@ -1,3 +1,10 @@
+build/reports/**/*.html linguist-generated
+docs/**/*.html linguist-vendored
+dist/**/*.html linguist-vendored
+vendor/**/*.html linguist-vendored
+src/main/resources/static/vendor/*.html linguist-vendored
+*.html  linguist-skip=true
+
 /gradlew text eol=lf
 *.bat text eol=crlf
 *.jar binary
