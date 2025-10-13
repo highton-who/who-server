@@ -7,5 +7,4 @@ import java.util.List;
 
 public interface AttendanceLogRepository extends JpaRepository<AttendanceLog, Long> {
     List<AttendanceLog> findAllByUser_AppliedTrue();
-    //언더바는 중첩된 속성을 구분하기 위해 사용됨
 }

@@ -1,5 +1,7 @@
 package com.pick.zick.global.security;
 
+import com.pick.zick.global.exception.BusinessException;
+import com.pick.zick.global.exception.ErrorCode;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -23,7 +25,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 Authentication authentication = jwtTokenProvider.authentication(token);
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }else{
-                //TODO("잘못된 토큰 예외처리")
+                throw new BusinessException(ErrorCode.INVALID_TOKEN);
             }
         }
         filterChain.doFilter(request,response);

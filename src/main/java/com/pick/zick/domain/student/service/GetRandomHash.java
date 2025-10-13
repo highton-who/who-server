@@ -38,7 +38,6 @@ public class GetRandomHash {
     }
 
     private void saveHashToRedis(String hash, Long studentId) {
-        //나중에 300L(5분) -> 30L(30초)로 변경할 것
         redisTemplate.opsForValue().set(hash, studentId.toString(), 300L, TimeUnit.SECONDS);
     }
 }

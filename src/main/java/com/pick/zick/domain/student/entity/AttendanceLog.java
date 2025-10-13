@@ -20,7 +20,7 @@ public class AttendanceLog {
     private MealType mealType;
 
     @Column(nullable = false)
-    private Boolean status; //출입 허가 여부
+    private Boolean status;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(nullable = false)

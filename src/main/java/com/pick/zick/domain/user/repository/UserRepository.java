@@ -8,7 +8,7 @@ import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long>{
-    boolean existsByLoginId(String loginId); // loginId 기준으로 중복 체크 제발 loginId로 수정해줘ㅜㅜㅜ
+    boolean existsByLoginId(String loginId);
     Optional<User> findByLoginId(String loginId);
 }
 

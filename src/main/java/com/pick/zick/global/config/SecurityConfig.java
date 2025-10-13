@@ -24,20 +24,16 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                // REST API 기본 셋업
                 .csrf(csrf -> csrf.disable())
                 .formLogin(form -> form.disable())
                 .httpBasic(basic -> basic.disable())
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 
-                // 엔드포인트 권한
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/zick/ping", "/zick/auth/**").permitAll() // 로그인/회원가입 허용
                         .anyRequest().permitAll()
                 )
-                .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class)
-                //.addFilterBefore(new ExceptionFilter(objectMapper), JwtAuthenticationFilter.class)
-                ;
+                .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);
 
 
         return http.build();

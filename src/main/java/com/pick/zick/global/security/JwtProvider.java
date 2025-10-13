@@ -27,15 +27,12 @@ public class JwtProvider {
 
     private static final String ACCESS_TOKEN = "access_token";
 
-    /** SecretKey 초기화 **/
     @PostConstruct
     public void init() {
-        // Base64 인코딩된 문자열을 SecretKey로 변환
         byte[] keyBytes = Base64.getEncoder().encode(jwtProperty.getJwtSecret().getBytes());
         this.secretKey = Keys.hmacShaKeyFor(keyBytes);
     }
 
-    /** JWT 발급 **/
     public TokenResponse generateToken(String id, String role) {
         String accessToken = generateToken(id, ACCESS_TOKEN, role, jwtProperty.getAccessExp());
         return new TokenResponse(accessToken, jwtProperty.getPrefix(), "200");
@@ -52,7 +49,6 @@ public class JwtProvider {
                 .compact();
     }
 
-    /** 요청에서 토큰 추출 **/
     public String resolveToken(HttpServletRequest request) {
         String token = request.getHeader(jwtProperty.getHeader());
         if (token != null && token.startsWith(jwtProperty.getPrefix())) {
@@ -61,7 +57,6 @@ public class JwtProvider {
         return null;
     }
 
-    /** 토큰 유효성 검사 **/
     public boolean validToken(String token) {
         try {
             Jwts.parserBuilder()
@@ -74,7 +69,6 @@ public class JwtProvider {
         }
     }
 
-    /** Authentication 생성 **/
     public Authentication authentication(String token) {
         Claims body = getJws(token).getBody();
         UserDetails userDetails = authDetailsService.loadUserByUsername(body.getSubject());

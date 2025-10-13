@@ -33,7 +33,7 @@ public class CheckCanEnterService {
 
         Boolean applied = userRepository.findById(studentId).orElseThrow(() -> UserNotFoundException.EXCEPTION).getApplied();
         String loginId = userFacade.getCurrentLoginId();
-        boolean status = applied != null && applied; //신청 시 true, 아니면 false
+        boolean status = applied != null && applied;
 
         MealType mealType = MealTypeUtil.getCurrentMealType();
 

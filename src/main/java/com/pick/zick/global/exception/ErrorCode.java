@@ -8,6 +8,7 @@ import lombok.Getter;
 @AllArgsConstructor
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum ErrorCode {
+    INVALID_TOKEN("invalidToken", 401),
     USER_NOT_FOUND("userNotFound", 404),
     KEY_NOT_FOUND("keyNotFound", 404),
     INTERNAL_SERVER_ERROR("internalServerError", 500);

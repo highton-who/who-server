@@ -10,8 +10,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-//토큰을 넣으면 토큰을 확인해서 안에있는 userId같은 걸로 user객체를 찾아와줘 userdetails 형식으로 바꿈
-//그걸 다시 securitycontextholder에 있는 어쩌구에 넣어서 현재 로그인한 유저의 정보를 알아낼 수 있음
 @AllArgsConstructor
 public class AuthDetails implements UserDetails {
     private final User user;
