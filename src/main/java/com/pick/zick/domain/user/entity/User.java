@@ -1,11 +1,14 @@
 package com.pick.zick.domain.user.entity;
 
+import com.pick.zick.domain.student.entity.AttendanceLog;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicUpdate;
+
+import java.util.List;
 
 @Entity
 @Getter
@@ -40,6 +43,9 @@ public class User {
 
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    private List<AttendanceLog> attendanceLog;
 
     public void updateVerified(Boolean verified) {
         this.verified = verified;
