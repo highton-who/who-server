@@ -10,8 +10,6 @@ import org.hibernate.annotations.DynamicUpdate;
 @Entity
 @Getter
 @NoArgsConstructor
-@AllArgsConstructor
-@Builder
 @DynamicUpdate
 @AllArgsConstructor
 @Builder
@@ -33,9 +31,11 @@ public class User {
     private String studentNumber;
 
     @Column(nullable = false)
+    @Builder.Default
     private Boolean applied = false;
 
     @Column(nullable = false)
+    @Builder.Default
     private Boolean verified = false;
 
     @Enumerated(EnumType.STRING)
