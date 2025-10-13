@@ -4,10 +4,7 @@ import com.pick.zick.domain.student.dto.request.CheckCanEnterRequest;
 import com.pick.zick.domain.student.dto.request.UpdateStudentRequest;
 import com.pick.zick.domain.student.dto.response.CheckCanEnterResponse;
 import com.pick.zick.domain.student.dto.response.ExcelResponse;
-import com.pick.zick.domain.student.service.AttendanceExcelService;
-import com.pick.zick.domain.student.service.CheckCanEnterService;
-import com.pick.zick.domain.student.service.GetRandomHash;
-import com.pick.zick.domain.student.service.UpdateStudentService;
+import com.pick.zick.domain.student.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,6 +18,7 @@ public class StudentController {
     private final CheckCanEnterService checkCanEnterService;
     private final AttendanceExcelService attendanceExcelService;
     private final UpdateStudentService updateStudentService;
+    private final DeleteStudentService deleteStudentService;
 
     @GetMapping("/qr")
     public String getRandomHash() throws NoSuchAlgorithmException {
@@ -40,5 +38,10 @@ public class StudentController {
     @PatchMapping("students/{id}")
     public void updateStudent(@PathVariable Long id, @RequestBody UpdateStudentRequest updateStudentRequest) {
         updateStudentService.execute(id, updateStudentRequest);
+    }
+
+    @DeleteMapping("students/{id}")
+    public void deleteStudent(@PathVariable Long id) {
+        deleteStudentService.execute(id);
     }
 }
