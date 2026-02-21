@@ -1,14 +1,14 @@
 package com.pick.zick.domain.user.entity;
 
-import com.pick.zick.domain.student.entity.AttendanceLog;
+import com.pick.zick.domain.feed.entity.Feed;
 import jakarta.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicUpdate;
-
-import java.util.List;
 
 @Entity
 @Getter
@@ -25,36 +25,10 @@ public class User {
     private String loginId;
 
     @Column(nullable = false)
-    private String userName;
-
-    @Column(nullable = false)
     private String password;
 
-    @Column(nullable = true, unique = true)
-    private String studentNumber;
-
-    @Column(nullable = false)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
-    private Boolean applied = false;
-
-    @Column(nullable = false)
-    @Builder.Default
-    private Boolean verified = false;
-
-    @Enumerated(EnumType.STRING)
-    private Role role;
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
-    private List<AttendanceLog> attendanceLog;
-
-    public void updateVerified(Boolean verified) {
-        this.verified = verified;
-    }
-
-    public void update(String studentNumber, String userName, Boolean applied){
-        this.studentNumber = studentNumber;
-        this.userName = userName;
-        this.applied = applied;
-    }
+    private List<Feed> feeds = new ArrayList<>();
 }
 

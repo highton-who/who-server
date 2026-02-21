@@ -7,13 +7,6 @@ public record SignupRequest(
                 message = "아이디는 영문자+숫자 조합 16자 이내여야 합니다.")
         String loginId,
 
-        @NotBlank(message = "이름은 필수입니다.")
-        @Size(max = 30, message = "이름은 30자 이하여야 합니다.")
-        String userName,
-
-        String studentNumber,
-        String role,
-
         @NotBlank @Size(min = 8, max = 64, message = "비밀번호는 8~64자여야 합니다.")
         @Pattern(
                 regexp = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[!@#$%^&*()\\-_=+<>?]).{8,64}$",

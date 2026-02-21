@@ -2,7 +2,6 @@ package com.pick.zick.domain.auth.service;
 
 import com.pick.zick.domain.auth.dto.SignupRequest;
 import com.pick.zick.domain.auth.dto.LoginRequest;
-import com.pick.zick.domain.user.entity.Role;
 import com.pick.zick.domain.user.entity.User;
 import com.pick.zick.domain.user.repository.UserRepository;
 import com.pick.zick.global.security.JwtProvider;
@@ -27,14 +26,11 @@ public class AuthService {
 
         User user = User.builder()
                 .loginId(req.loginId())
-                .userName(req.userName())
-                .studentNumber(req.studentNumber())
-                .role(Role.valueOf(req.role()))
                 .password(passwordEncoder.encode(req.password()))
                 .build();
         userRepository.save(user);
 
-        return jwtProvider.generateToken(user.getLoginId(), user.getRole().toString());
+        return jwtProvider.generateToken(user.getLoginId());
     }
 
     public TokenResponse login(LoginRequest req) {
@@ -47,6 +43,6 @@ public class AuthService {
             throw new IllegalArgumentException("비밀번호가 올바르지 않습니다.");
         }
 
-        return jwtProvider.generateToken(user.getLoginId(), user.getRole().toString());
+        return jwtProvider.generateToken(user.getLoginId());
     }
 }

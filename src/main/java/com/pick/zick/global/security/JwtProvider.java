@@ -33,16 +33,15 @@ public class JwtProvider {
         this.secretKey = Keys.hmacShaKeyFor(keyBytes);
     }
 
-    public TokenResponse generateToken(String id, String role) {
-        String accessToken = generateToken(id, ACCESS_TOKEN, role, jwtProperty.getAccessExp());
+    public TokenResponse generateToken(String id) {
+        String accessToken = generateToken(id, jwtProperty.getAccessExp());
         return new TokenResponse(accessToken, jwtProperty.getPrefix(), "200");
     }
 
-    private String generateToken(String id, String type, String role, Long exp) {
+    private String generateToken(String id, Long exp) {
         return Jwts.builder()
                 .setSubject(id)
-                .setHeaderParam("typ", type)
-                .claim("role", role)
+                .setHeaderParam("typ", JwtProvider.ACCESS_TOKEN)
                 .signWith(secretKey) // <- deprecated 아님
                 .setExpiration(new Date(System.currentTimeMillis() + exp * 1000))
                 .setIssuedAt(new Date())

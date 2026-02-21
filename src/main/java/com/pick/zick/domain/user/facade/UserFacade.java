@@ -1,6 +1,5 @@
 package com.pick.zick.domain.user.facade;
 
-import com.pick.zick.domain.user.entity.Role;
 import com.pick.zick.domain.user.entity.User;
 import com.pick.zick.domain.user.exception.UserNotFoundException;
 import com.pick.zick.domain.user.repository.UserRepository;
@@ -15,10 +14,6 @@ public class UserFacade {
 
     public String getCurrentLoginId() {
         return SecurityContextHolder.getContext().getAuthentication().getName();
-    }
-
-    public Role getRole() {
-        return getCurrentUser().getRole();
     }
 
     public User getCurrentUser() {
