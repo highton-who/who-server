@@ -27,6 +27,7 @@ jwt:
   header: ${HEADER}
   prefix: ${PREFIX}
 
+
 server:
   servlet:
     context-path: /who
